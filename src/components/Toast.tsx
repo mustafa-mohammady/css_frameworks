@@ -10,10 +10,10 @@ export default function Toast({ show, message, onClose }: ToastProps) {
     <div
       role="status"
       aria-live="polite"
-      className="pointer-events-none fixed inset-x-4 bottom-4 flex justify-end sm:left-auto"
+      className="pointer-events-none fixed inset-x-3 bottom-3 flex justify-end sm:left-auto"
     >
       {show && (
-        <div className="pointer-events-auto flex items-center gap-3 rounded-lg bg-toast-bg py-3 pr-2 pl-4 text-toast-fg shadow-lg">
+        <div className="pointer-events-auto flex items-center gap-2 rounded-lg bg-toast-bg py-3 pr-2 pl-3 text-toast-fg shadow-lg">
           <span>{message}</span>
           <button
             type="button"

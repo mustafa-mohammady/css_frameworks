@@ -11,7 +11,7 @@ type ToolbarProps = {
 
 export default function Toolbar({ query, onQueryChange, status, onStatusChange }: ToolbarProps) {
   return (
-    <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
       <SearchInput value={query} onChange={onQueryChange} />
       <StatusFilter value={status} onChange={onStatusChange} />
     </div>

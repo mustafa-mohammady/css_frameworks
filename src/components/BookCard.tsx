@@ -11,7 +11,7 @@ type BookCardProps = {
 
 export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
   return (
-    <li className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 shadow-sm">
+    <li className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-3 shadow-sm">
       <h3 className="text-lg font-semibold">{book.title}</h3>
       <p className="text-muted">{book.author}</p>
       <div className="flex items-center gap-2">

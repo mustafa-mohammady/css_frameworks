@@ -22,13 +22,14 @@ A reading list built with React 19, TypeScript and Vite. No backend, the data is
 Approach: **Tailwind CSS v4** (via `@tailwindcss/vite`).
 
 - Use Tailwind CSS v4 only. No `tailwind.config.js`, configure with `@theme` in `src/index.css`.
-- Colors come only from the semantic tokens in `@theme` (`bg-primary`, `text-muted`, `border-border`, `bg-done-bg`, ...). No raw palette classes (`bg-blue-600`) in components, no hex colors.
-- Spacing comes only from Tailwind's default scale. No arbitrary values (`p-[13px]`, `bg-[#123456]`).
+- **Design tokens** live in `tokens/tokens.json` (shared with the Bootstrap version). Change values only there, then run `npm run tokens` to regenerate `tokens/tokens.css` and `tokens/_tokens.scss`. Never edit the generated files.
+- Colors come only from the semantic tokens mapped in `@theme` (`bg-primary`, `text-muted`, `border-border`, `bg-done-bg`, ...). No raw palette classes (`bg-blue-600`) in components, no hex colors.
+- Spacing comes only from the shared token scale `0` to `5` (`p-3`, `gap-2`, `mb-4`; same steps as Bootstrap: 0, 0.25, 0.5, 1, 1.5, 3 rem). Tailwind's default scale is switched off. No arbitrary values (`p-[13px]`, `bg-[#123456]`).
 - No inline `style` props, no other CSS libraries, no `@apply` in components.
 - Reuse components. Do not repeat long class lists, extract a component (`Button`) or a shared class constant in `src/components/styles.ts`.
 - Dialogs use the native `<dialog>` element with `showModal()`, wrapped in `src/components/Dialog.tsx`.
 - Every interactive element uses the shared focus ring (`FOCUS_RING` in `src/components/styles.ts`).
-- Dark mode: `@custom-variant dark` (class `dark` on `<html>`, set by `src/useTheme.ts`). Every token has a light value in `:root` and a dark value in `@variant dark` in `src/index.css`. Components do not use `dark:` classes for colors; they only use tokens. Text on a colored background uses its `on-*` token, never `text-white`.
+- Dark mode: `@custom-variant dark` (class `dark` on `<html>`, set by `src/useTheme.ts`). Every color token has a light and a dark value in `tokens/tokens.json`. Components do not use `dark:` classes for colors; they only use tokens. Text on a colored background uses its `on-*` token, never `text-white`.
 
 Rules for every approach:
 
