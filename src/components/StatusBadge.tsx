@@ -3,11 +3,11 @@ import Badge from "react-bootstrap/Badge";
 import { STATUS_LABELS } from "../books";
 import type { Status } from "../types";
 
-/** The one place where a status gets its theme color. */
-const STATUS_VARIANTS: Record<Status, { bg: string; text?: "dark" }> = {
-  "want-to-read": { bg: "secondary" },
-  reading: { bg: "warning", text: "dark" },
-  done: { bg: "success" },
+/** The one place where a status gets its theme color (subtle background, emphasis text). */
+const STATUS_VARIANTS: Record<Status, string> = {
+  "want-to-read": "secondary",
+  reading: "warning",
+  done: "success",
 };
 
 type StatusBadgeProps = {
@@ -15,9 +15,9 @@ type StatusBadgeProps = {
 };
 
 export default function StatusBadge({ status }: StatusBadgeProps) {
-  const { bg, text } = STATUS_VARIANTS[status];
+  const variant = STATUS_VARIANTS[status];
   return (
-    <Badge bg={bg} text={text}>
+    <Badge pill bg={`${variant}-subtle`} className={`text-${variant}-emphasis`}>
       {STATUS_LABELS[status]}
     </Badge>
   );

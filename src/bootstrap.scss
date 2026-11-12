@@ -1,0 +1,66 @@
+// Bootstrap, built from Sass with the shared design tokens.
+// The tokens come from tokens/tokens.json (run `npm run tokens` after a change).
+// Bootstrap needs real colors here, not CSS variables, because it computes
+// button text colors, hover shades and focus rings in Sass.
+
+@import "../tokens/tokens"; // $token-colors, $token-colors-dark, $token-spaces
+
+@function token($name) {
+  @return map-get($token-colors, $name);
+}
+
+// Theme colors
+$primary: token("primary");
+$danger: token("danger");
+$success: token("toast-bg"); // only the toast uses solid success
+$secondary: token("muted"); // the outline "Cancel" buttons
+
+// Page
+$body-color: token("text");
+$body-bg: token("surface");
+$body-secondary-color: token("muted");
+$body-tertiary-bg: token("surface-muted");
+$border-color: token("border");
+$modal-backdrop-bg: token("backdrop");
+
+// Status badges use the subtle background and the emphasis text of a theme color
+$secondary-bg-subtle: token("want-bg");
+$secondary-text-emphasis: token("want-fg");
+$warning-bg-subtle: token("reading-bg");
+$warning-text-emphasis: token("reading-fg");
+$success-bg-subtle: token("done-bg");
+$success-text-emphasis: token("done-fg");
+
+// Spacing: the shared scale 0 to 5 drives p-*, m-*, gap-* and the component paddings
+$spacers: $token-spaces;
+$spacer: map-get($token-spaces, 3);
+
+// Extra utility: .text-star for the rating stars
+$utilities: (
+  "star-color": (
+    property: color,
+    class: text,
+    values: (
+      star: token("star"),
+    ),
+  ),
+);
+
+@import "bootstrap/scss/bootstrap";
+
+// Hover colors come from the tokens too, instead of Bootstrap's computed shades.
+.btn-primary {
+  --bs-btn-color: #{token("on-primary")};
+  --bs-btn-hover-bg: #{token("primary-hover")};
+  --bs-btn-hover-border-color: #{token("primary-hover")};
+  --bs-btn-active-bg: #{token("primary-hover")};
+  --bs-btn-active-border-color: #{token("primary-hover")};
+}
+
+.btn-danger {
+  --bs-btn-color: #{token("on-danger")};
+  --bs-btn-hover-bg: #{token("danger-hover")};
+  --bs-btn-hover-border-color: #{token("danger-hover")};
+  --bs-btn-active-bg: #{token("danger-hover")};
+  --bs-btn-active-border-color: #{token("danger-hover")};
+}

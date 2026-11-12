@@ -10,7 +10,7 @@ export default function StarRating({ rating }: StarRatingProps) {
   }
 
   return (
-    <span className="text-warning-emphasis">
+    <span className="text-star">
       <span aria-hidden="true">
         {"★".repeat(rating)}
         {"☆".repeat(MAX_RATING - rating)}

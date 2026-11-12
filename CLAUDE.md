@@ -24,8 +24,10 @@ Approach: **Bootstrap 5** with **react-bootstrap**.
 - Use Bootstrap utility classes for layout, spacing and typography (`container`, `row`, `col-*`, `d-flex`, `gap-*`, `p-*`, `m-*`, `text-*`).
 - Use `react-bootstrap` components for interactive parts: `Modal` for dialogs, `Toast` / `ToastContainer` for messages, `Button`, `Form`, `Card`, `Badge`.
 - Do not use Bootstrap's own JavaScript (`bootstrap.bundle.js`) or `data-bs-toggle`. It does not work well with React.
-- Colors come only from Bootstrap theme colors (`primary`, `secondary`, `success`, `danger`, `warning`, `light`, `dark`). Do not invent hex colors.
-- Spacing comes only from the Bootstrap scale (`0` to `5`). Do not invent pixel values.
+- **Design tokens** live in `tokens/tokens.json` (shared with the Tailwind version). Change values only there, then run `npm run tokens` to regenerate `tokens/tokens.css` and `tokens/_tokens.scss`. Never edit the generated files.
+- Bootstrap is built from Sass in `src/bootstrap.scss`, which feeds the tokens into Bootstrap's variables (`$primary`, `$body-color`, `$spacers`, ...). Do not import the precompiled `bootstrap.min.css`.
+- Colors come only from Bootstrap theme colors and their `-subtle` / `-emphasis` variants, plus the token utility `text-star`. Do not invent hex colors.
+- Spacing comes only from the shared token scale `0` to `5` (`$spacers`). Do not invent pixel values.
 - No inline `style` props, no other CSS libraries.
 - If the same class list is repeated, extract a component.
 
