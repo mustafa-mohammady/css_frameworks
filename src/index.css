@@ -1,1 +1,28 @@
-/* Intentionally empty. Your styling approach goes here (or somewhere else, depending on the approach). */
+@import "tailwindcss";
+
+/*
+ * The one place for colors. Components use only these semantic tokens
+ * (bg-primary, text-muted, ...), never raw palette classes or hex values.
+ */
+@theme inline {
+  --color-primary: var(--color-blue-600);
+  --color-primary-hover: var(--color-blue-700);
+  --color-danger: var(--color-red-600);
+  --color-danger-hover: var(--color-red-700);
+
+  --color-text: var(--color-slate-900);
+  --color-muted: var(--color-slate-600);
+  --color-surface: var(--color-white);
+  --color-surface-muted: var(--color-slate-50);
+  --color-border: var(--color-slate-200);
+  --color-backdrop: var(--color-slate-900);
+
+  --color-want-bg: var(--color-slate-200);
+  --color-want-fg: var(--color-slate-800);
+  --color-reading-bg: var(--color-amber-100);
+  --color-reading-fg: var(--color-amber-900);
+  --color-done-bg: var(--color-green-100);
+  --color-done-fg: var(--color-green-800);
+
+  --color-star: var(--color-amber-700);
+}
