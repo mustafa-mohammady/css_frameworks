@@ -1,4 +1,4 @@
-import Button from "react-bootstrap/Button";
+import Button from "./Button";
 
 type AppHeaderProps = {
   onAdd: (trigger: HTMLElement) => void;
@@ -6,11 +6,9 @@ type AppHeaderProps = {
 
 export default function AppHeader({ onAdd }: AppHeaderProps) {
   return (
-    <header className="d-flex justify-content-between align-items-center flex-wrap gap-3 pb-3 mb-4 border-bottom">
-      <h1 className="h3 mb-0">Reading List</h1>
-      <Button variant="primary" onClick={(event) => onAdd(event.currentTarget)}>
-        + Add book
-      </Button>
+    <header className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
+      <h1 className="text-2xl font-semibold">Reading List</h1>
+      <Button onClick={(event) => onAdd(event.currentTarget)}>+ Add book</Button>
     </header>
   );
 }

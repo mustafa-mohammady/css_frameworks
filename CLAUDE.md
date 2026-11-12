@@ -19,15 +19,15 @@ A reading list built with React 19, TypeScript and Vite. No backend, the data is
 
 ## Styling
 
-Approach: **Bootstrap 5** with **react-bootstrap**.
+Approach: **Tailwind CSS v4** (via `@tailwindcss/vite`).
 
-- Use Bootstrap utility classes for layout, spacing and typography (`container`, `row`, `col-*`, `d-flex`, `gap-*`, `p-*`, `m-*`, `text-*`).
-- Use `react-bootstrap` components for interactive parts: `Modal` for dialogs, `Toast` / `ToastContainer` for messages, `Button`, `Form`, `Card`, `Badge`.
-- Do not use Bootstrap's own JavaScript (`bootstrap.bundle.js`) or `data-bs-toggle`. It does not work well with React.
-- Colors come only from Bootstrap theme colors (`primary`, `secondary`, `success`, `danger`, `warning`, `light`, `dark`). Do not invent hex colors.
-- Spacing comes only from the Bootstrap scale (`0` to `5`). Do not invent pixel values.
-- No inline `style` props, no other CSS libraries.
-- If the same class list is repeated, extract a component.
+- Use Tailwind CSS v4 only. No `tailwind.config.js`, configure with `@theme` in `src/index.css`.
+- Colors come only from the semantic tokens in `@theme` (`bg-primary`, `text-muted`, `border-border`, `bg-done-bg`, ...). No raw palette classes (`bg-blue-600`) in components, no hex colors.
+- Spacing comes only from Tailwind's default scale. No arbitrary values (`p-[13px]`, `bg-[#123456]`).
+- No inline `style` props, no other CSS libraries, no `@apply` in components.
+- Reuse components. Do not repeat long class lists, extract a component (`Button`) or a shared class constant in `src/components/styles.ts`.
+- Dialogs use the native `<dialog>` element with `showModal()`, wrapped in `src/components/Dialog.tsx`.
+- Every interactive element uses the shared focus ring (`FOCUS_RING` in `src/components/styles.ts`).
 
 Rules for every approach:
 

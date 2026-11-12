@@ -1,4 +1,4 @@
-import Button from "react-bootstrap/Button";
+import Button from "./Button";
 
 type EmptyStateProps = {
   hasBooks: boolean;
@@ -7,16 +7,16 @@ type EmptyStateProps = {
 
 export default function EmptyState({ hasBooks, onClearFilters }: EmptyStateProps) {
   return (
-    <div className="text-center py-5 px-3 border rounded bg-body-tertiary">
+    <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface-muted px-4 py-12 text-center">
       {hasBooks ? (
         <>
-          <p className="mb-3">No books match your search or filter.</p>
+          <p>No books match your search or filter.</p>
           <Button variant="outline-primary" onClick={onClearFilters}>
             Clear filters
           </Button>
         </>
       ) : (
-        <p className="mb-0">Your reading list is empty. Add your first book.</p>
+        <p>Your reading list is empty. Add your first book.</p>
       )}
     </div>
   );

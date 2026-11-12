@@ -1,4 +1,4 @@
-import Form from "react-bootstrap/Form";
+import { fieldClass } from "./styles";
 
 type SearchInputProps = {
   value: string;
@@ -7,14 +7,18 @@ type SearchInputProps = {
 
 export default function SearchInput({ value, onChange }: SearchInputProps) {
   return (
-    <Form.Group controlId="search">
-      <Form.Label visuallyHidden>Search by title</Form.Label>
-      <Form.Control
+    <div className="w-full md:max-w-md">
+      <label htmlFor="search" className="sr-only">
+        Search by title
+      </label>
+      <input
+        id="search"
         type="search"
         placeholder="Search by title..."
         value={value}
         onChange={(event) => onChange(event.target.value)}
+        className={fieldClass()}
       />
-    </Form.Group>
+    </div>
   );
 }

@@ -1,20 +1,19 @@
-import { useRef, useState } from "react";
-import Container from "react-bootstrap/Container";
+import { useEffect, useRef, useState } from "react";
 
 import { filterBooks } from "./books";
 import AppHeader from "./components/AppHeader";
-import AppToast from "./components/AppToast";
-import BookFormModal from "./components/BookFormModal";
+import BookFormDialog from "./components/BookFormDialog";
 import BookList from "./components/BookList";
-import DeleteConfirmModal from "./components/DeleteConfirmModal";
+import DeleteConfirmDialog from "./components/DeleteConfirmDialog";
+import Toast from "./components/Toast";
 import Toolbar from "./components/Toolbar";
 import type { Book, NewBook, StatusFilter } from "./types";
 import { useBooks } from "./useBooks";
 
-/** `book` stays set while the dialog fades out, so its content does not jump. */
-type DialogState = { show: boolean; book: Book | null };
+type DialogState = { open: boolean; book: Book | null };
 
-const CLOSED: DialogState = { show: false, book: null };
+const CLOSED: DialogState = { open: false, book: null };
+const TOAST_DURATION_MS = 3000;
 
 export default function App() {
   const { books, addBook, updateBook, deleteBook } = useBooks();
@@ -28,6 +27,15 @@ export default function App() {
   const countHeadingRef = useRef<HTMLHeadingElement>(null);
 
   const visibleBooks = filterBooks(books, { status, query });
+
+  useEffect(() => {
+    if (!toast.show) return;
+    const timer = setTimeout(
+      () => setToast((current) => ({ ...current, show: false })),
+      TOAST_DURATION_MS
+    );
+    return () => clearTimeout(timer);
+  }, [toast]);
 
   function showToast(message: string) {
     setToast({ show: true, message });
@@ -45,12 +53,12 @@ export default function App() {
 
   function openForm(book: Book | null, trigger: HTMLElement) {
     triggerRef.current = trigger;
-    setFormDialog({ show: true, book });
+    setFormDialog({ open: true, book });
   }
 
   function openDelete(book: Book, trigger: HTMLElement) {
     triggerRef.current = trigger;
-    setDeleteDialog({ show: true, book });
+    setDeleteDialog({ open: true, book });
   }
 
   function handleSave(values: NewBook) {
@@ -61,7 +69,7 @@ export default function App() {
       addBook(values);
       showToast("Book added");
     }
-    setFormDialog((current) => ({ ...current, show: false }));
+    setFormDialog(CLOSED);
   }
 
   function handleConfirmDelete() {
@@ -69,7 +77,7 @@ export default function App() {
       deleteBook(deleteDialog.book.id);
       showToast("Book deleted");
     }
-    setDeleteDialog((current) => ({ ...current, show: false }));
+    setDeleteDialog(CLOSED);
   }
 
   function clearFilters() {
@@ -78,8 +86,8 @@ export default function App() {
   }
 
   return (
-    <>
-      <Container as="main" className="py-4">
+    <div className="min-h-screen bg-surface text-text">
+      <main className="mx-auto max-w-6xl px-4 py-6">
         <AppHeader onAdd={(trigger) => openForm(null, trigger)} />
         <Toolbar
           query={query}
@@ -95,27 +103,27 @@ export default function App() {
           onDelete={openDelete}
           onClearFilters={clearFilters}
         />
-      </Container>
+      </main>
 
-      <BookFormModal
-        show={formDialog.show}
+      <BookFormDialog
+        open={formDialog.open}
         book={formDialog.book}
         onSave={handleSave}
-        onHide={() => setFormDialog((current) => ({ ...current, show: false }))}
-        onExited={returnFocus}
+        onClose={() => setFormDialog(CLOSED)}
+        onClosed={returnFocus}
       />
-      <DeleteConfirmModal
-        show={deleteDialog.show}
+      <DeleteConfirmDialog
+        open={deleteDialog.open}
         book={deleteDialog.book}
         onConfirm={handleConfirmDelete}
-        onHide={() => setDeleteDialog((current) => ({ ...current, show: false }))}
-        onExited={returnFocus}
+        onClose={() => setDeleteDialog(CLOSED)}
+        onClosed={returnFocus}
       />
-      <AppToast
+      <Toast
         show={toast.show}
         message={toast.message}
         onClose={() => setToast((current) => ({ ...current, show: false }))}
       />
-    </>
+    </div>
   );
 }

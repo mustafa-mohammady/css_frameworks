@@ -6,16 +6,16 @@ type StarRatingProps = {
 
 export default function StarRating({ rating }: StarRatingProps) {
   if (rating === null) {
-    return <span className="small text-body-secondary">Not rated</span>;
+    return <span className="text-sm text-muted">Not rated</span>;
   }
 
   return (
-    <span className="text-warning-emphasis">
+    <span className="text-star">
       <span aria-hidden="true">
         {"★".repeat(rating)}
         {"☆".repeat(MAX_RATING - rating)}
       </span>
-      <span className="visually-hidden">
+      <span className="sr-only">
         {rating} of {MAX_RATING} stars
       </span>
     </span>

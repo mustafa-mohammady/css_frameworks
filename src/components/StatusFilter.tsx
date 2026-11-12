@@ -1,6 +1,3 @@
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-
 import { STATUS_LABELS } from "../books";
 import type { Status, StatusFilter as StatusFilterValue } from "../types";
 
@@ -17,27 +14,33 @@ type StatusFilterProps = {
   onChange: (value: StatusFilterValue) => void;
 };
 
+/** Real radio buttons, so the arrow keys move between the options. */
 export default function StatusFilter({ value, onChange }: StatusFilterProps) {
   return (
-    <ToggleButtonGroup
-      type="radio"
-      name="status-filter"
-      size="sm"
-      className="flex-wrap"
-      aria-label="Filter by status"
-      value={value}
-      onChange={(next: StatusFilterValue) => onChange(next)}
-    >
-      {OPTIONS.map((option) => (
-        <ToggleButton
-          key={option.value}
-          id={`status-filter-${option.value}`}
-          value={option.value}
-          variant="outline-primary"
-        >
-          {option.label}
-        </ToggleButton>
-      ))}
-    </ToggleButtonGroup>
+    <fieldset className="flex flex-wrap gap-2">
+      <legend className="sr-only">Filter by status</legend>
+      {OPTIONS.map((option) => {
+        const id = `status-filter-${option.value}`;
+        return (
+          <div key={option.value}>
+            <input
+              type="radio"
+              id={id}
+              name="status-filter"
+              value={option.value}
+              checked={value === option.value}
+              onChange={() => onChange(option.value)}
+              className="peer sr-only"
+            />
+            <label
+              htmlFor={id}
+              className="inline-block cursor-pointer rounded-full border border-primary px-3 py-1 text-sm text-primary hover:bg-surface-muted peer-checked:bg-primary peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary"
+            >
+              {option.label}
+            </label>
+          </div>
+        );
+      })}
+    </fieldset>
   );
 }

@@ -9,20 +9,11 @@ type ToolbarProps = {
   onStatusChange: (status: StatusFilterValue) => void;
 };
 
-export default function Toolbar({
-  query,
-  onQueryChange,
-  status,
-  onStatusChange,
-}: ToolbarProps) {
+export default function Toolbar({ query, onQueryChange, status, onStatusChange }: ToolbarProps) {
   return (
-    <div className="row g-3 align-items-center mb-4">
-      <div className="col-12 col-md-6">
-        <SearchInput value={query} onChange={onQueryChange} />
-      </div>
-      <div className="col-12 col-md-6 d-flex justify-content-md-end">
-        <StatusFilter value={status} onChange={onStatusChange} />
-      </div>
+    <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <SearchInput value={query} onChange={onQueryChange} />
+      <StatusFilter value={status} onChange={onStatusChange} />
     </div>
   );
 }
