@@ -34,7 +34,7 @@ export default function StatusFilter({ value, onChange }: StatusFilterProps) {
             />
             <label
               htmlFor={id}
-              className="inline-block cursor-pointer rounded-full border border-primary px-3 py-1 text-sm text-primary hover:bg-surface-muted peer-checked:bg-primary peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary"
+              className="inline-block cursor-pointer rounded-full border border-primary px-3 py-1 text-sm text-primary hover:bg-surface-muted peer-checked:bg-primary peer-checked:text-on-primary peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary"
             >
               {option.label}
             </label>

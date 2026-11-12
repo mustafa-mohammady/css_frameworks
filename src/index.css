@@ -1,28 +1,100 @@
 @import "tailwindcss";
 
+/* Dark mode is a class on <html>, set by useTheme (system setting or the toggle). */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
  * The one place for colors. Components use only these semantic tokens
  * (bg-primary, text-muted, ...), never raw palette classes or hex values.
+ * Each token has a light and a dark value; the components do not change.
  */
 @theme inline {
-  --color-primary: var(--color-blue-600);
-  --color-primary-hover: var(--color-blue-700);
-  --color-danger: var(--color-red-600);
-  --color-danger-hover: var(--color-red-700);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-on-danger: var(--on-danger);
 
-  --color-text: var(--color-slate-900);
-  --color-muted: var(--color-slate-600);
-  --color-surface: var(--color-white);
-  --color-surface-muted: var(--color-slate-50);
-  --color-border: var(--color-slate-200);
-  --color-backdrop: var(--color-slate-900);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-backdrop: var(--backdrop);
 
-  --color-want-bg: var(--color-slate-200);
-  --color-want-fg: var(--color-slate-800);
-  --color-reading-bg: var(--color-amber-100);
-  --color-reading-fg: var(--color-amber-900);
-  --color-done-bg: var(--color-green-100);
-  --color-done-fg: var(--color-green-800);
+  --color-want-bg: var(--want-bg);
+  --color-want-fg: var(--want-fg);
+  --color-reading-bg: var(--reading-bg);
+  --color-reading-fg: var(--reading-fg);
+  --color-done-bg: var(--done-bg);
+  --color-done-fg: var(--done-fg);
 
-  --color-star: var(--color-amber-700);
+  --color-star: var(--star);
+  --color-toast-bg: var(--toast-bg);
+  --color-toast-fg: var(--toast-fg);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    --primary: var(--color-blue-600);
+    --primary-hover: var(--color-blue-700);
+    --on-primary: var(--color-white);
+    --danger: var(--color-red-600);
+    --danger-hover: var(--color-red-700);
+    --on-danger: var(--color-white);
+
+    --text: var(--color-slate-900);
+    --muted: var(--color-slate-600);
+    --surface: var(--color-white);
+    --surface-muted: var(--color-slate-50);
+    --border: var(--color-slate-200);
+    --backdrop: var(--color-slate-900);
+
+    --want-bg: var(--color-slate-200);
+    --want-fg: var(--color-slate-800);
+    --reading-bg: var(--color-amber-100);
+    --reading-fg: var(--color-amber-900);
+    --done-bg: var(--color-green-100);
+    --done-fg: var(--color-green-800);
+
+    --star: var(--color-amber-700);
+    --toast-bg: var(--color-green-800);
+    --toast-fg: var(--color-white);
+
+    @variant dark {
+      color-scheme: dark;
+
+      --primary: var(--color-blue-400);
+      --primary-hover: var(--color-blue-300);
+      --on-primary: var(--color-slate-950);
+      --danger: var(--color-red-400);
+      --danger-hover: var(--color-red-300);
+      --on-danger: var(--color-slate-950);
+
+      --text: var(--color-slate-100);
+      --muted: var(--color-slate-400);
+      --surface: var(--color-slate-900);
+      --surface-muted: var(--color-slate-800);
+      --border: var(--color-slate-700);
+      --backdrop: var(--color-slate-950);
+
+      --want-bg: var(--color-slate-700);
+      --want-fg: var(--color-slate-100);
+      --reading-bg: var(--color-amber-900);
+      --reading-fg: var(--color-amber-100);
+      --done-bg: var(--color-green-900);
+      --done-fg: var(--color-green-100);
+
+      --star: var(--color-amber-400);
+      --toast-bg: var(--color-green-200);
+      --toast-fg: var(--color-green-950);
+    }
+  }
+
+  body {
+    @apply bg-surface text-text;
+  }
 }

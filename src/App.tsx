@@ -9,6 +9,7 @@ import Toast from "./components/Toast";
 import Toolbar from "./components/Toolbar";
 import type { Book, NewBook, StatusFilter } from "./types";
 import { useBooks } from "./useBooks";
+import { useTheme } from "./useTheme";
 
 type DialogState = { open: boolean; book: Book | null };
 
@@ -17,6 +18,7 @@ const TOAST_DURATION_MS = 3000;
 
 export default function App() {
   const { books, addBook, updateBook, deleteBook } = useBooks();
+  const { theme, toggleTheme } = useTheme();
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<StatusFilter>("all");
   const [formDialog, setFormDialog] = useState<DialogState>(CLOSED);
@@ -88,7 +90,11 @@ export default function App() {
   return (
     <div className="min-h-screen bg-surface text-text">
       <main className="mx-auto max-w-6xl px-4 py-6">
-        <AppHeader onAdd={(trigger) => openForm(null, trigger)} />
+        <AppHeader
+          theme={theme}
+          onToggleTheme={toggleTheme}
+          onAdd={(trigger) => openForm(null, trigger)}
+        />
         <Toolbar
           query={query}
           onQueryChange={setQuery}

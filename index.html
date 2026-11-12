@@ -4,6 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Reading List</title>
+    <script>
+      // Set the theme before the first paint, so there is no flash. Same rules as src/useTheme.ts.
+      try {
+        const stored = localStorage.getItem("reading-list:theme");
+        const dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle("dark", dark);
+      } catch {}
+    </script>
   </head>
 
   <body>

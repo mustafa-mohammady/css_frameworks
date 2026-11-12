@@ -1,6 +1,6 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeAll, expect, test } from "vitest";
+import { afterEach, beforeAll, describe, expect, test, vi } from "vitest";
 
 import App from "./App";
 
@@ -103,4 +103,42 @@ test("Escape closes the dialog and returns focus to the trigger", async () => {
 
   await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
   expect(addButton).toHaveFocus();
+});
+
+describe("dark mode", () => {
+  afterEach(() => {
+    document.documentElement.classList.remove("dark");
+    vi.unstubAllGlobals();
+  });
+
+  test("the toggle switches the theme and remembers the choice", async () => {
+    const { user } = setup();
+    const toggle = screen.getByRole("button", { name: "Dark mode" });
+    expect(toggle).toHaveAttribute("aria-pressed", "false");
+    expect(document.documentElement).not.toHaveClass("dark");
+
+    await user.click(toggle);
+    expect(toggle).toHaveAttribute("aria-pressed", "true");
+    expect(document.documentElement).toHaveClass("dark");
+    expect(localStorage.getItem("reading-list:theme")).toBe("dark");
+
+    // Back to the system theme (light): the choice is cleared.
+    await user.click(toggle);
+    expect(document.documentElement).not.toHaveClass("dark");
+    expect(localStorage.getItem("reading-list:theme")).toBeNull();
+  });
+
+  test("follows the system setting when nothing is stored", () => {
+    vi.stubGlobal("matchMedia", (query: string) => ({
+      matches: query === "(prefers-color-scheme: dark)",
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    }));
+    setup();
+    expect(document.documentElement).toHaveClass("dark");
+    expect(screen.getByRole("button", { name: "Dark mode" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
+  });
 });
