@@ -28,6 +28,7 @@ Approach: **Tailwind CSS v4** (via `@tailwindcss/vite`).
 - Reuse components. Do not repeat long class lists, extract a component (`Button`) or a shared class constant in `src/components/styles.ts`.
 - Dialogs use the native `<dialog>` element with `showModal()`, wrapped in `src/components/Dialog.tsx`.
 - Every interactive element uses the shared focus ring (`FOCUS_RING` in `src/components/styles.ts`).
+- Dark mode: `@custom-variant dark` (class `dark` on `<html>`, set by `src/useTheme.ts`). Every token has a light value in `:root` and a dark value in `@variant dark` in `src/index.css`. Components do not use `dark:` classes for colors; they only use tokens. Text on a colored background uses its `on-*` token, never `text-white`.
 
 Rules for every approach:
 
