@@ -54,11 +54,11 @@ export default function Dialog({ open, title, onClose, onClosed, children }: Dia
       aria-labelledby={titleId}
       onKeyDown={handleKeyDown}
       onCancel={handleCancel}
-      className="m-auto w-full max-w-lg bg-transparent p-4 backdrop:bg-backdrop/50"
+      className="m-auto w-full max-w-lg bg-transparent p-3 backdrop:bg-backdrop/50"
     >
       {open && (
         <div className="rounded-lg bg-surface text-text shadow-xl">
-          <div className="flex items-center justify-between gap-4 border-b border-border p-4">
+          <div className="flex items-center justify-between gap-3 border-b border-border p-3">
             <h2 id={titleId} className="text-lg font-semibold">
               {title}
             </h2>

@@ -89,7 +89,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface text-text">
-      <main className="mx-auto max-w-6xl px-4 py-6">
+      <main className="mx-auto max-w-6xl px-3 py-4">
         <AppHeader
           theme={theme}
           onToggleTheme={toggleTheme}

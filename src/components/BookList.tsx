@@ -23,13 +23,13 @@ export default function BookList({
 }: BookListProps) {
   return (
     <section>
-      <h2 ref={headingRef} tabIndex={-1} className="mb-4 text-sm font-medium text-muted">
+      <h2 ref={headingRef} tabIndex={-1} className="mb-3 text-sm font-medium text-muted">
         {books.length} {books.length === 1 ? "book" : "books"}
       </h2>
       {books.length === 0 ? (
         <EmptyState hasBooks={hasBooks} onClearFilters={onClearFilters} />
       ) : (
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {books.map((book) => (
             <BookCard key={book.id} book={book} onEdit={onEdit} onDelete={onDelete} />
           ))}

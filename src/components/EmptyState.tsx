@@ -7,7 +7,7 @@ type EmptyStateProps = {
 
 export default function EmptyState({ hasBooks, onClearFilters }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface-muted px-4 py-12 text-center">
+    <div className="flex flex-col items-center gap-3 rounded-lg border border-border bg-surface-muted px-3 py-5 text-center">
       {hasBooks ? (
         <>
           <p>No books match your search or filter.</p>

@@ -14,8 +14,8 @@ const VARIANTS: Record<Variant, string> = {
 };
 
 const SIZES: Record<Size, string> = {
-  sm: "px-3 py-1 text-sm",
-  md: "px-4 py-2",
+  sm: "px-2 py-1 text-sm",
+  md: "px-3 py-2",
 };
 
 type ButtonProps = ComponentProps<"button"> & {

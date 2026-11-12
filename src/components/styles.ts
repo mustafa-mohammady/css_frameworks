@@ -10,6 +10,6 @@ export function fieldClass(invalid = false): string {
   return `${FIELD} ${invalid ? "border-danger" : "border-border"}`;
 }
 
-export const DIALOG_BODY = "flex flex-col gap-4 p-4";
+export const DIALOG_BODY = "flex flex-col gap-3 p-3";
 
-export const DIALOG_FOOTER = "flex justify-end gap-2 border-t border-border p-4";
+export const DIALOG_FOOTER = "flex justify-end gap-2 border-t border-border p-3";
